@@ -6,28 +6,38 @@ public class Position {
 
     private final int x;
     private final int y;
+    private final int z;
 
 
-    public Position(int x, int y) {
+    public Position(int x, int y, int z) {
         this.x = x;
         this.y = y;
+        this.z = z;
 
     }
 
     public Position left() {
-        return newPosition(x - 1, y);
+        return newPosition(x - 1, y, z);
     }
 
     public Position right() {
-        return newPosition(x+1, y);
+        return newPosition(x + 1, y, z);
     }
 
     public Position up() {
-        return newPosition(x, y+1);
+        return newPosition(x, y + 1, z);
     }
 
     public Position down() {
-        return newPosition(x, y-1);
+        return newPosition(x, y - 1, z);
+    }
+
+    public Position forward() {
+        return newPosition(x, y, z + 1);
+    }
+
+    public Position backward() {
+        return newPosition(x, y, z - 1);
     }
 
     @Override
@@ -35,8 +45,9 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
-        return x == position.x &&
-                y == position.y;
+        return (x == position.x &&
+                y == position.y &&
+                z == position.z);
     }
 
     @Override
@@ -49,10 +60,11 @@ public class Position {
         return "Position{" +
                 "x=" + x +
                 ", y=" + y +
+                ", z=" + z +
                 '}';
     }
 
-    private Position newPosition(int i, int j) {
-        return new Position(i, j);
+    private Position newPosition(int i, int j, int k) {
+        return new Position(i, j, k);
     }
 }

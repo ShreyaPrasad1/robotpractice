@@ -10,45 +10,42 @@ class RobotTest {
 
     @BeforeEach
     void setUp() {
-        robot = new Robot(positionObject(0, 0));
+        Position startPosition = new Position(0, 0, 0);
+        robot = new Robot(startPosition);
     }
 
     @Test
     public void shouldCreateRobotWithPosition(){
 
-        Assertions.assertEquals(positionObject(0, 0), robot.getCurrentPosition());
+        Assertions.assertEquals(new Position(0, 0, 0), robot.getCurrentPosition());
     }
 
     @Test
     void shouldMoveOneStepLeft() {
         robot.moveLeft();
 
-        Assertions.assertEquals(positionObject(-1, 0), robot.getCurrentPosition());
+        Assertions.assertEquals(new Position(-1, 0, 0), robot.getCurrentPosition());
     }
 
     @Test
     void shouldMoveOneStepRight() {
         robot.moveRight();
 
-        Assertions.assertEquals(positionObject(1, 0), robot.getCurrentPosition());
+        Assertions.assertEquals(new Position(1, 0, 0), robot.getCurrentPosition());
     }
 
     @Test
     void shouldMoveOneStepUp() {
         robot.moveUp();
 
-        Assertions.assertEquals(positionObject(0, 1), robot.getCurrentPosition());
+        Assertions.assertEquals(new Position(0, 1, 0), robot.getCurrentPosition());
     }
 
     @Test
     void shouldMoveOneStepDown() {
         robot.moveDown();
 
-        Assertions.assertEquals(positionObject(0, -1), robot.getCurrentPosition());
-    }
-
-    private static Position positionObject(int i, int i2) {
-        return new Position(i, i2);
+        Assertions.assertEquals(new Position(0, -1, 0), robot.getCurrentPosition());
     }
 
 
