@@ -19,6 +19,8 @@ public class RobotController {
                 case DOWN: robot.moveDown();break;
                 case LEFT: robot.moveLeft(); break;
                 case RIGHT: robot.moveRight(); break;
+                case FORWARD:robot.moveForward(); break;
+                case BACKWARD:robot.moveBackward(); break;
             }
         }
     }

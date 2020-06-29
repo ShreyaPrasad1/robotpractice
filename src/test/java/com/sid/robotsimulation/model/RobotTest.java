@@ -48,5 +48,18 @@ class RobotTest {
         Assertions.assertEquals(new Position(0, -1, 0), robot.getCurrentPosition());
     }
 
+    @Test
+    void shouldMoveOneStepForward() {
+        robot.moveForward();
+
+        Assertions.assertEquals(new Position(0, 0, 1), robot.getCurrentPosition());
+    }
+
+    @Test
+    void shouldMoveOneStepBackward() {
+        robot.moveBackward();
+
+        Assertions.assertEquals(new Position(0, 0, -1), robot.getCurrentPosition());
+    }
 
 }

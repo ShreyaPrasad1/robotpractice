@@ -55,6 +55,27 @@ class RobotControllerTest {
     }
 
     @Test
+    public void shouldMoveTheRobotForwardNTimes(){
+        robotController.moveCommand(Direction.FORWARD, Direction.FORWARD);
+
+        Assertions.assertEquals(new Position(0, 0, 2), robot.getCurrentPosition());
+    }
+
+    @Test
+    public void shouldMoveTheRobBackwardNTimes(){
+        robotController.moveCommand(Direction.BACKWARD, Direction.BACKWARD);
+
+        Assertions.assertEquals(new Position(0, 0, -2), robot.getCurrentPosition());
+    }
+
+    @Test
+    public void shouldRemainAtSamePositionWhenMovedForwardAndBackward(){
+        robotController.moveCommand(Direction.FORWARD, Direction.BACKWARD);
+
+        Assertions.assertEquals(new Position(0, 0, 0), robot.getCurrentPosition());
+    }
+
+    @Test
     public void shouldGetTheInitialPositionOfRobot(){
         robotController.moveCommand(Direction.UP, Direction.DOWN);
 

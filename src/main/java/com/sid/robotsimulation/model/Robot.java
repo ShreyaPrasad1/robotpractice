@@ -34,4 +34,11 @@ public class Robot {
     }
 
 
+    public void moveForward() {
+        this.currentPosition = this.currentPosition.forward();
+    }
+
+    public void moveBackward() {
+        this.currentPosition = this.currentPosition.backward();
+    }
 }
