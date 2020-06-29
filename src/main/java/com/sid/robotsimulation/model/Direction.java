@@ -1,5 +1,5 @@
 package com.sid.robotsimulation.model;
 
-public enum Directions {
+public enum Direction {
     UP, DOWN, LEFT, RIGHT
 }

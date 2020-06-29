@@ -1,6 +1,6 @@
 package controllers;
 
-import com.sid.robotsimulation.model.Directions;
+import com.sid.robotsimulation.model.Direction;
 import com.sid.robotsimulation.model.Robot;
 
 public class RobotController {
@@ -11,7 +11,15 @@ public class RobotController {
         this.robot = robot;
     }
 
-    public void robotMoveCommands(Directions ... directions) {
-        robot.moveCommand(directions);
+    //TODO map instead of switch
+    public void moveCommand(Direction... directions) {
+        for (Direction direction: directions) {
+            switch (direction) {
+                case UP: robot.moveUp() ; break;
+                case DOWN: robot.moveDown();break;
+                case LEFT: robot.moveLeft(); break;
+                case RIGHT: robot.moveRight(); break;
+            }
+        }
     }
 }
