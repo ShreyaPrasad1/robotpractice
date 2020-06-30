@@ -11,7 +11,6 @@ public class RobotController {
         this.robot = robot;
     }
 
-    //TODO map instead of switch
     public void moveCommand(Direction... directions) {
         for (Direction direction: directions) {
             switch (direction) {

@@ -13,7 +13,6 @@ public class Position {
         this.x = x;
         this.y = y;
         this.z = z;
-
     }
 
     public Position left() {
@@ -38,6 +37,13 @@ public class Position {
 
     public Position backward() {
         return newPosition(x, y, z - 1);
+    }
+
+    public Double distanceFrom(Position position) {
+        double xSquared = Math.pow((position.x - x), 2);
+        double ySquared = Math.pow((position.y - y), 2);
+        double zSquared = Math.pow((position.z - z), 2);
+        return Math.sqrt(xSquared + ySquared + zSquared);
     }
 
     @Override
