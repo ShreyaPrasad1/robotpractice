@@ -12,29 +12,40 @@ class RobotServiceTest {
     private RobotService robotService;
     private Robot robotOne;
     private Robot robotTwo;
+    private RobotController robotControllerOne;
+    private RobotController robotControllerTwo;
 
     @BeforeEach
     void setup() {
         robotService = new RobotService();
         robotOne = new Robot(new Position(0, 0, 0));
         robotTwo = new Robot(new Position(0, 0, 0));
-    }
-
-    @Test
-    void expectDistanceBetweenTwoRobotsBeZero() {
-        Double distance = robotService.findDistance(robotOne, robotTwo);
-
-        Assertions.assertEquals(Double.valueOf(0), distance);
+        robotControllerOne = new RobotController(robotOne);
+        robotControllerOne.moveCommand(Direction.LEFT, Direction.LEFT);
+        robotControllerTwo = new RobotController(robotTwo);
+        robotControllerTwo.moveCommand(Direction.RIGHT, Direction.RIGHT);
     }
 
     @Test
     void shouldCalculateDistanceWithFinalPosition() {
-        RobotController robotControllerOne = new RobotController(robotOne);
-        robotControllerOne.moveCommand(Direction.LEFT, Direction.LEFT);
-        RobotController robotControllerTwo = new RobotController(robotTwo);
-        robotControllerTwo.moveCommand(Direction.RIGHT, Direction.RIGHT);
         Double distance = robotService.findDistance(robotOne, robotTwo);
+
         Assertions.assertEquals(Double.valueOf(4), distance);
     }
 
+    @Test
+    void shouldReturnFalseIfTwoRobotsDontCrossEachOther() {
+        robotTwo = new Robot(new Position(1, 0, 0));
+        Boolean actual = robotService.crossesPath(robotOne, robotTwo);
+
+        Assertions.assertEquals(false, actual);
+    }
+
+    @Test
+    void shouldReturnTrueIfTwoRobotsCrossEachOther() {
+        robotControllerOne.moveCommand(Direction.LEFT, Direction.RIGHT, Direction.RIGHT);
+        Boolean actual = robotService.crossesPath(robotOne, robotTwo);
+
+        Assertions.assertEquals(true, actual);
+    }
 }

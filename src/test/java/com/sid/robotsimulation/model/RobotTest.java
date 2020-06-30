@@ -15,7 +15,7 @@ class RobotTest {
     }
 
     @Test
-    public void shouldCreateRobotWithPosition(){
+    void shouldCreateRobotWithPosition(){
 
         Assertions.assertEquals(new Position(0, 0, 0), robot.getCurrentPosition());
     }
@@ -60,6 +60,15 @@ class RobotTest {
         robot.moveBackward();
 
         Assertions.assertEquals(new Position(0, 0, -1), robot.getCurrentPosition());
+    }
+
+    @Test
+    void shouldGiveVisitedPoints() {
+        robot.moveDown();
+        robot.moveUp();
+        MovementTracker movementTracker = robot.getMovementTracker();
+
+        Assertions.assertEquals(3, movementTracker.getVisited().size());
     }
 
 }
