@@ -1,5 +1,6 @@
 package com.sid.robotsimulation.model;
 
+import controllers.RobotController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,12 +64,32 @@ class RobotTest {
     }
 
     @Test
-    void shouldGiveVisitedPoints() {
-        robot.moveDown();
-        robot.moveUp();
-        MovementTracker movementTracker = robot.getMovementTracker();
+    void shouldFindDistanceBetweenTwoRobots() {
+        Robot robotTwo = new Robot(new Position(2, 0, 0));
+        Double distance = robot.getDistance(robotTwo);
 
-        Assertions.assertEquals(3, movementTracker.getVisited().size());
+        Assertions.assertEquals(Double.valueOf(2), distance);
     }
 
+    @Test
+    void shouldReturnTrueWhenRobotHasCrossedPathWithOtherRobot() {
+        Robot otherRobot = new Robot(new Position(1, 0, 0));
+        RobotController robotController = new RobotController(otherRobot);
+        robotController.moveCommand(Direction.LEFT, Direction.LEFT);
+
+        Boolean hasCrossedPath = robot.hasCrossedPath(otherRobot);
+
+        Assertions.assertTrue(hasCrossedPath);
+    }
+
+    @Test
+    void shouldReturnFalseWhenRobotHasNotCrossedPathWithOtherRobot() {
+        Robot otherRobot = new Robot(new Position(1, 0, 0));
+        RobotController robotController = new RobotController(otherRobot);
+        robotController.moveCommand(Direction.RIGHT, Direction.LEFT);
+
+        Boolean hasCrossedPath = robot.hasCrossedPath(otherRobot);
+
+        Assertions.assertFalse(hasCrossedPath);
+    }
 }

@@ -1,19 +1,29 @@
 package com.sid.robotsimulation.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Robot {
     private Position currentPosition;
     private final Position initialPosition;
-    private MovementTracker movementTracker;
+    private List<Position> visited;
 
     public Robot(Position startPosition) {
         this.currentPosition = startPosition;
         this.initialPosition = startPosition;
-        this.movementTracker = new MovementTracker();
-        this.movementTracker.add(startPosition);
+        this.visited = new ArrayList<>();
+        this.visited.add(initialPosition);
     }
 
-    public MovementTracker getMovementTracker() {
-        return movementTracker;
+    public Boolean hasCrossedPath(Robot otherRobot) {
+        return visited.stream().anyMatch(point ->
+                otherRobot.visited.stream()
+                        .anyMatch(point::equals)
+        );
+    }
+
+    public Double getDistance(Robot otherRobot) {
+        return currentPosition.distanceFrom(otherRobot.currentPosition);
     }
 
     public Position getCurrentPosition() {
@@ -26,32 +36,32 @@ public class Robot {
 
     public void moveLeft() {
         this.currentPosition = this.currentPosition.left();
-        this.movementTracker.add(currentPosition);
+        this.visited.add(currentPosition);
     }
 
     public void moveRight() {
         this.currentPosition = this.currentPosition.right();
-        this.movementTracker.add(currentPosition);
+        this.visited.add(currentPosition);
     }
 
     public void moveUp() {
         this.currentPosition = this.currentPosition.up();
-        this.movementTracker.add(currentPosition);
+        this.visited.add(currentPosition);
     }
 
     public void moveDown() {
         this.currentPosition = this.currentPosition.down();
-        this.movementTracker.add(currentPosition);
+        this.visited.add(currentPosition);
     }
 
 
     public void moveForward() {
         this.currentPosition = this.currentPosition.forward();
-        this.movementTracker.add(currentPosition);
+        this.visited.add(currentPosition);
     }
 
     public void moveBackward() {
         this.currentPosition = this.currentPosition.backward();
-        this.movementTracker.add(currentPosition);
+        this.visited.add(currentPosition);
     }
 }
